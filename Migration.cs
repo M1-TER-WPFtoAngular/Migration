@@ -5,12 +5,19 @@ using System.Diagnostics;
 
 class Migration {
 
+        // Messages d'erreurs
     private static string err_usage = "Usage: ./runC#.sh Migration.cs <Project To Migrate" ;
 
 
+        // Path utiles pour le script
+    private static string migrationFolderPath = "" ;
+    private static string wpfPath = "" ;
+    private static string angularPath = "" ;
+
 
     public static void Main (string[] args) {
-        Console.WriteLine ("=-=-=-=-=-=  WPF -> Angular  =-=-=-=-=-=");
+        string pwd;
+        Console.WriteLine ("\n                    =-=-=-=-=-=  WPF -> Angular  =-=-=-=-=-=");
         // Console.WriteLine("Args : " + string.Join(",", args));
         // Console.WriteLine("Args.Length : " + args.Length);
 
@@ -19,39 +26,115 @@ class Migration {
             return ;
         }
 
-        // Récupération du working directory
-        string pwd = Directory.GetCurrentDirectory();
+// ##############################################################################################################
+// ##############################################################################################################
+// ##############################################################################################################
+
+
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                     ^ ^");                                               
+        Console.WriteLine("                    (O,O)    ");                                            
+        Console.WriteLine("                    (   ) Première étape: Préparation à la migration    "); 
+        Console.WriteLine("                    -\"-\"------------------------------------------------------  ");
+
+
+        // Récupération du working directory : pwd
+        pwd = Directory.GetCurrentDirectory();
         Console.WriteLine("pwd : {0}", pwd);
 
         // Projet à migrer
         string projectToMigrate = args[0];
         Console.WriteLine("projectToMigrate : {0}", projectToMigrate);
 
+        // Création du répertoire de migration : mkdir
+        migrationFolderPath = Path.Combine(pwd, "WpfToAngular") ;
+        wpfPath = Path.Combine(migrationFolderPath, "WPF") ;
 
-        // Création du répertoire de migration
-        string migrationFolder = Path.Combine(pwd, "Migration") ;
-        if (Directory.Exists(migrationFolder)) {
-            Directory.Delete(migrationFolder, true) ;
+        if (Directory.Exists(migrationFolderPath)) {
+            Directory.Delete(migrationFolderPath, true) ;
         }
-        Directory.CreateDirectory(migrationFolder);
-        Console.WriteLine("mkdir : {0}", migrationFolder);
+        Directory.CreateDirectory(migrationFolderPath);
+        Directory.CreateDirectory(wpfPath);
+        Console.WriteLine("mkdir : {0}", migrationFolderPath);
+
+        // Copie du projet a migrer dans le fichier de migration : cp
+        CopyDirectory(@Path.Combine(pwd,projectToMigrate), @wpfPath);
+        Console.WriteLine("cp : {0} {1}", Path.Combine(pwd,projectToMigrate), wpfPath);
 
 
-        // Copie du projet a migrer dans le fichier de migration
-        Console.WriteLine("cp : {0} {1}", Path.Combine(pwd,projectToMigrate), Path.Combine(pwd, "Migration", "WPF"));
+        // cd migrationFolderPath && pwd
+        Directory.SetCurrentDirectory(@migrationFolderPath);
+        pwd = Directory.GetCurrentDirectory();
+        Console.WriteLine("pwd : {0}", pwd);
 
-        CopyDirectory(Path.Combine(pwd,projectToMigrate), Path.Combine(pwd, "Migration", "WPF"));
-        Console.WriteLine("cp : {0} {1}", Path.Combine(pwd,projectToMigrate), Path.Combine(pwd, "Migration", "WPF"));
+
+// ##############################################################################################################
+// ##############################################################################################################
+// ##############################################################################################################
 
 
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                     ^ ^    ");                                                  
+        Console.WriteLine("                    (O,O)      ");                                               
+        Console.WriteLine("                    (   ) Deuxième étape: Initialisation du projet Angular    ");
+        Console.WriteLine("                    -\"-\"------------------------------------------------------  ");
+
+            // Clone du dépot git "Template"
+        Console.WriteLine("git clone https://github.com/M1-TER-WPFtoAngular/AngularTemplate.git");
+        Console.WriteLine(executeShellCmd("git", "clone https://github.com/M1-TER-WPFtoAngular/AngularTemplate.git"));
+
+            // Création du projet Angular
+        Console.WriteLine("ng new "+projectToMigrate+ " --routing --defaults");
+        Console.WriteLine(executeShellCmd("ng", "new "+projectToMigrate+ " --routing --defaults"));
+        angularPath = Path.Combine(migrationFolderPath, projectToMigrate) ;
+
+            // Copie de index.html et de app-component.html
+        File.Copy(@"AngularTemplate/src/index.html", @projectToMigrate+"/src/index.html", true);  
+        Console.WriteLine("cp AngularTemplate/src/index.html "+projectToMigrate+"/src/index.html") ;
+
+        File.Copy(@"AngularTemplate/src/app/app.component.html", @projectToMigrate+"/src/app/app.component.html", true);  
+        Console.WriteLine("cp AngularTemplate/src/app/app.component.html "+projectToMigrate+"/src/app/app.component.html") ;
+
+            // Suppression du projet "template", il ne nous sert plus
+        if (Directory.Exists(@"AngularTemplate")) {
+            Directory.Delete(@"AngularTemplate", true) ;
+        }
+        Console.WriteLine("rm -rf AngularTemplate") ;
+
+// ##############################################################################################################
+// ##############################################################################################################
+// ##############################################################################################################
+
+
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                     ^ ^");                                               
+        Console.WriteLine("                    (O,O)    ");                                            
+        Console.WriteLine("                    (   ) Troisième étape: Migration du projet WPF    "); 
+        Console.WriteLine("                    -\"-\"------------------------------------------------------  ");
+
+
+        pwd = Directory.GetCurrentDirectory();
+        Console.WriteLine("pwd : {0}", pwd);
+
+        Console.WriteLine("migrationFolderPath : {0}", migrationFolderPath);
+        Console.WriteLine("wpfPath : {0}", wpfPath);
+        Console.WriteLine("angularPath : {0}", angularPath);
 
     }
 
 
-    public static void executeShellCmd(String cmd, String args) {
-        ProcessStartInfo startInfo = new ProcessStartInfo() { FileName = cmd, Arguments = args}; 
-        Process proc = new Process() { StartInfo = startInfo, };
-        proc.Start();
+    public static string executeShellCmd(String cmd, String args) {
+        ProcessStartInfo startInfo = new ProcessStartInfo() { 
+            FileName = cmd, 
+            Arguments = args,
+            RedirectStandardOutput = true,
+            UseShellExecute = false
+        }; 
+        var process = Process.Start(startInfo);
+        string output = process.StandardOutput.ReadToEnd(); 
+        process.WaitForExit();
+        
+        return output;
     }
 
 
@@ -60,14 +143,16 @@ class Migration {
         if (!dir.Exists)
             throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
 
-        DirectoryInfo[] dirs = dir.GetDirectories();
-
         foreach (FileInfo file in dir.GetFiles()){
             string targetFilePath = Path.Combine(destinationDir, file.Name);
             file.CopyTo(targetFilePath);
         }
+        DirectoryInfo[] dirs = dir.GetDirectories();
         foreach (DirectoryInfo subDir in dirs){
             string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
+            if (!Directory.Exists(newDestinationDir)) {
+                Directory.CreateDirectory(newDestinationDir);
+            }
             CopyDirectory(subDir.FullName, newDestinationDir);
         }   
     }
