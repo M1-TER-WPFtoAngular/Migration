@@ -2,7 +2,13 @@ using System;
 using System.IO;
 using System.Diagnostics;
 
+using System.Windows.Markup;
 
+/*
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+*/
 class Migration {
 
         // Messages d'erreurs
@@ -120,8 +126,52 @@ class Migration {
         Console.WriteLine("wpfPath : {0}", wpfPath);
         Console.WriteLine("angularPath : {0}", angularPath);
 
+
+//                             ##########################################################
+//                             ##########################################################
+//                             ##########################################################
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                         ^ ^");                                               
+        Console.WriteLine("                        (O,O)    ");                                            
+        Console.WriteLine("                        (   ) 3.1 : Transformation des fichiers XAML vers des fichiers HTML"); 
+        Console.WriteLine("                        -\"-\"------------------------------------------------------  ");
+
+
+
+
+
+//                             ##########################################################
+//                             ##########################################################
+//                             ##########################################################
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                         ^ ^");                                               
+        Console.WriteLine("                        (O,O)    ");                                            
+        Console.WriteLine("                        (   ) 3.2 : Positionnement et style des éléments HTML"); 
+        Console.WriteLine("                        -\"-\"------------------------------------------------------  ");
+
+
+
+
+
+//                             ##########################################################
+//                             ##########################################################
+//                             ##########################################################
+        Console.WriteLine("\n\n") ;
+        Console.WriteLine("                         ^ ^");                                               
+        Console.WriteLine("                        (O,O)    ");                                            
+        Console.WriteLine("                        (   ) 3.3 : Transformation des fichiers C# vers des fichiers TYPESCRIPT"); 
+        Console.WriteLine("                        -\"-\"------------------------------------------------------  ");
+
     }
 
+
+    /*
+    public static CompilationUnitSyntax getAstFromCS(String programme) {
+        SyntaxTree tree = CSharpSyntaxTree.ParseText(programme);
+        CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
+
+        return root;
+    }*/
 
     public static string executeShellCmd(String cmd, String args) {
         ProcessStartInfo startInfo = new ProcessStartInfo() { 
@@ -136,7 +186,6 @@ class Migration {
         
         return output;
     }
-
 
     static void CopyDirectory(string sourceDir, string destinationDir){
         var dir = new DirectoryInfo(sourceDir);
