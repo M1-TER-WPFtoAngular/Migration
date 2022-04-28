@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
+
 
 using System.Windows.Markup;
 
@@ -107,6 +109,7 @@ class Migration {
         }
         Console.WriteLine("rm -rf AngularTemplate") ;
 
+
 // ##############################################################################################################
 // ##############################################################################################################
 // ##############################################################################################################
@@ -137,8 +140,43 @@ class Migration {
         Console.WriteLine("                        -\"-\"------------------------------------------------------  ");
 
 
+            // cd WPF && pwd
+        Directory.SetCurrentDirectory(@wpfPath);
+        pwd = Directory.GetCurrentDirectory();
+        Console.WriteLine("pwd : {0}", pwd);
+
+            // Récupération de tout les fichiers xaml
+        List<string> xamlFiles = getFilesByExtension(@wpfPath, "xaml") ;
+        foreach (string file in xamlFiles) {
+            string fileNameExt = file.Name.Split("/").Last;
+            string fileName = file.Name.Split(".")[0];
+
+            Console.WriteLine("Dealing with : " + fileName + " (" + fileNameExt + ")");
+
+                // cd angularpath && pwd
+            Directory.SetCurrentDirectory(@angularPath);
+            pwd = Directory.GetCurrentDirectory();
+            Console.WriteLine("pwd : {0}", pwd);
+
+                // Création du composant Angular
+            Console.WriteLine("ng generate component "+fileName);
+            Console.WriteLine(executeShellCmd("ng", "generate component "+fileName));
 
 
+                // Gérer les routes
+                // Ast
+                // Traduction du HTML
+                // Positionnement
+                // Logique métier
+
+
+
+                // cd WPF && pwd
+            Directory.SetCurrentDirectory(@wpfPath);
+            pwd = Directory.GetCurrentDirectory();
+            Console.WriteLine("pwd : {0}", pwd);
+        }
+        
 
 //                             ##########################################################
 //                             ##########################################################
@@ -204,6 +242,23 @@ class Migration {
             }
             CopyDirectory(subDir.FullName, newDestinationDir);
         }   
+    }
+
+    public static List<string> getFilesByExtension(string path, string extension) {
+        List<string> ret = new List<string>();
+        var dir = new DirectoryInfo(path);
+        foreach (FileInfo file in dir.GetFiles()){
+            string[] splitName = file.Name.Split(".");
+            if (splitName[splitName.Length-1] == extension) {
+                ret.Add(Path.Combine(path, file.Name));
+                //Console.WriteLine(Path.Combine(path, file.Name)) ;
+            }
+        }
+        DirectoryInfo[] dirs = dir.GetDirectories();
+        foreach (DirectoryInfo subDir in dirs){
+            ret.AddRange(getFilesByExtension(Path.Combine(path, subDir.Name), extension));
+        }   
+        return ret;
     }
 }
 
