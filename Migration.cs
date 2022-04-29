@@ -148,8 +148,9 @@ class Migration {
             // Récupération de tout les fichiers xaml
         List<string> xamlFiles = getFilesByExtension(@wpfPath, "xaml") ;
         foreach (string file in xamlFiles) {
-            string fileNameExt = file.Name.Split("/").Last;
-            string fileName = file.Name.Split(".")[0];
+            string[] filezefjzeof = file.Split("/");
+            string fileNameExt = filezefjzeof[filezefjzeof.Length-1];
+            string fileName = file.Split(".")[0];
 
             Console.WriteLine("Dealing with : " + fileName + " (" + fileNameExt + ")");
 
