@@ -5,14 +5,15 @@ using System.Collections.Generic;
 
 using System.Windows.Markup;
 
-class Tests {
+namespace test {
+public class Tests {
     
     private static string migrationFolderPath = "" ;
     private static string wpfPath = "" ;
     private static string angularPath = "" ;
 
 
-    public static void Main (string[] args) {
+    public static void testestst (string[] args) {
         string pwd;
         // Récupération du working directory : pwd
         pwd = Directory.GetCurrentDirectory();
@@ -65,4 +66,5 @@ class Tests {
         return ret;
     }
 
+}
 }

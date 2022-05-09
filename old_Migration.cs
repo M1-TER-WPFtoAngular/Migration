@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 */
+namespace test2 {
 class Migration {
 
         // Messages d'erreurs
@@ -261,5 +262,6 @@ class Migration {
         }   
         return ret;
     }
+}
 }
 

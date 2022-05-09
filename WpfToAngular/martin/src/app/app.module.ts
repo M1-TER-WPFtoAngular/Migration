@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainWindowComponent } from './home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/main-window/main-window.component';
+import { MainWindowComponent } from './main-window/main-window.component';
 
 @NgModule({
   declarations: [

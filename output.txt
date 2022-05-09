@@ -1,79 +1,109 @@
-martin@u21:~/Desktop/M1-TER-WPFtoAngular/Migration$ ./runC#.sh Migration.cs testMigrate
-mono Migration.cs.exe testMigrate
-
+mono Migration.exe martin
+ 
 
                     =-=-=-=-=-=  WPF -> Angular  =-=-=-=-=-=
 
 
 
                      ^ ^
-                    (O,O)
+                    (O,O)    
                     (   ) Première étape: Préparation à la migration
-                    -"-"------------------------------------------------------
-pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration
-projectToMigrate : testMigrate
-mkdir : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
-cp : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/testMigrate /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
-pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
+                    -"-"------------------------------------------------------  
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration
+> projectToMigrate : martin
+> mkdir : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
+> cp : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/martin /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
+> cd /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
 
 
 
                      ^ ^
-                    (O,O)
+                    (O,O)    
                     (   ) Deuxième étape: Initialisation du projet Angular
-                    -"-"------------------------------------------------------
-git clone https://github.com/M1-TER-WPFtoAngular/AngularTemplate.git
+                    -"-"------------------------------------------------------  
+> git clone https://github.com/M1-TER-WPFtoAngular/AngularTemplate.git
 Cloning into 'AngularTemplate'...
 remote: Enumerating objects: 42, done.
 remote: Counting objects: 100% (42/42), done.
 remote: Compressing objects: 100% (37/37), done.
 remote: Total 42 (delta 5), reused 31 (delta 1), pack-reused 0
-Receiving objects: 100% (42/42), 195.06 KiB | 36.00 KiB/s, done.
+Receiving objects: 100% (42/42), 195.06 KiB | 2.32 MiB/s, done.
 Resolving deltas: 100% (5/5), done.
-
-ng new testMigrate --routing --defaults
+> 
+> ng new martin --routing --defaults
 ✔ Packages installed successfully.
-CREATE testMigrate/README.md (1065 bytes)
-CREATE testMigrate/.editorconfig (274 bytes)
-CREATE testMigrate/.gitignore (548 bytes)
-CREATE testMigrate/angular.json (3070 bytes)
-CREATE testMigrate/package.json (1075 bytes)
-CREATE testMigrate/tsconfig.json (863 bytes)
-CREATE testMigrate/.browserslistrc (600 bytes)
-CREATE testMigrate/karma.conf.js (1429 bytes)
-CREATE testMigrate/tsconfig.app.json (287 bytes)
-CREATE testMigrate/tsconfig.spec.json (333 bytes)
-CREATE testMigrate/.vscode/extensions.json (130 bytes)
-CREATE testMigrate/.vscode/launch.json (474 bytes)
-CREATE testMigrate/.vscode/tasks.json (938 bytes)
-CREATE testMigrate/src/favicon.ico (948 bytes)
-CREATE testMigrate/src/index.html (297 bytes)
-CREATE testMigrate/src/main.ts (372 bytes)
-CREATE testMigrate/src/polyfills.ts (2338 bytes)
-CREATE testMigrate/src/styles.css (80 bytes)
-CREATE testMigrate/src/test.ts (745 bytes)
-CREATE testMigrate/src/assets/.gitkeep (0 bytes)
-CREATE testMigrate/src/environments/environment.prod.ts (51 bytes)
-CREATE testMigrate/src/environments/environment.ts (658 bytes)
-CREATE testMigrate/src/app/app-routing.module.ts (245 bytes)
-CREATE testMigrate/src/app/app.module.ts (393 bytes)
-CREATE testMigrate/src/app/app.component.css (0 bytes)
-CREATE testMigrate/src/app/app.component.html (23364 bytes)
-CREATE testMigrate/src/app/app.component.spec.ts (1088 bytes)
-CREATE testMigrate/src/app/app.component.ts (215 bytes)
+> CREATE martin/README.md (1060 bytes)
+CREATE martin/.editorconfig (274 bytes)
+CREATE martin/.gitignore (548 bytes)
+CREATE martin/angular.json (3039 bytes)
+CREATE martin/package.json (1069 bytes)
+CREATE martin/tsconfig.json (863 bytes)
+CREATE martin/.browserslistrc (600 bytes)
+CREATE martin/karma.conf.js (1423 bytes)
+CREATE martin/tsconfig.app.json (287 bytes)
+CREATE martin/tsconfig.spec.json (333 bytes)
+CREATE martin/.vscode/extensions.json (130 bytes)
+CREATE martin/.vscode/launch.json (474 bytes)
+CREATE martin/.vscode/tasks.json (938 bytes)
+CREATE martin/src/favicon.ico (948 bytes)
+CREATE martin/src/index.html (292 bytes)
+CREATE martin/src/main.ts (372 bytes)
+CREATE martin/src/polyfills.ts (2338 bytes)
+CREATE martin/src/styles.css (80 bytes)
+CREATE martin/src/test.ts (745 bytes)
+CREATE martin/src/assets/.gitkeep (0 bytes)
+CREATE martin/src/environments/environment.prod.ts (51 bytes)
+CREATE martin/src/environments/environment.ts (658 bytes)
+CREATE martin/src/app/app-routing.module.ts (245 bytes)
+CREATE martin/src/app/app.module.ts (393 bytes)
+CREATE martin/src/app/app.component.css (0 bytes)
+CREATE martin/src/app/app.component.html (23364 bytes)
+CREATE martin/src/app/app.component.spec.ts (1073 bytes)
+CREATE martin/src/app/app.component.ts (210 bytes)
     Directory is already under version control. Skipping initialization of git.
 
-cp AngularTemplate/src/index.html testMigrate/src/index.html
-cp AngularTemplate/src/app/app.component.html testMigrate/src/app/app.component.html
-rm -rf AngularTemplate
+> cp AngularTemplate/src/index.html martin/src/index.html
+> cp AngularTemplate/src/app/app.component.html martin/src/app/app.component.html
+> rm -rf AngularTemplate
 
 
 
                      ^ ^
-                    (O,O)
+                    (O,O)    
                     (   ) Troisième étape: Migration du projet WPF
-                    -"-"------------------------------------------------------
-pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
-migrationFolderPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
-wpfPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
-angularPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/testMigrate
+                    -"-"------------------------------------------------------  
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
+> projectToMigrate : martin
+> migrationFolderPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular
+> wpfPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
+> angularPath : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/martin
+
+
+
+                     ^ ^
+                    (O,O)    
+                    (   ) 3.1 : Génération des composant Angular
+                    -"-"------------------------------------------------------  
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
+> Dealing with : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/App (App.xaml)
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/martin
+> ng generate component /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/App
+> CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/app/app.component.css (0 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/app/app.component.html (18 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/app/app.component.spec.ts (605 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/app/app.component.ts (263 bytes)
+
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
+> Dealing with : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/MainWindow (MainWindow.xaml)
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/martin
+> ng generate component /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/MainWindow
+> CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/main-window/main-window.component.css (0 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/main-window/main-window.component.html (26 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/main-window/main-window.component.spec.ts (655 bytes)
+CREATE src/app/home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/main-window/main-window.component.ts (294 bytes)
+UPDATE src/app/app.module.ts (567 bytes)
+
+> pwd : /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF
+> //home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/App -> /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/AppComponent
+> //home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/MainWindow -> /home/martin/Desktop/M1-TER-WPFtoAngular/Migration/WpfToAngular/WPF/martin/MainWindowComponent
