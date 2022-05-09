@@ -10,11 +10,15 @@ namespace MigrationTool {
 
             // Path utiles pour le script
         private string migrationFolderPath = "" ;
+        public string getMigrationFolderPath() { return migrationFolderPath;}
         private string wpfPath = "" ;
+        public string getWpfPath() { return wpfPath;}
         private string angularPath = "" ;
+        public string getAngularPath() { return angularPath;}
+
 
         private string projectToMigrate = "" ;
-        public Migration setProjectToMigrate(string project) { projectToMigrate = project ;}
+        public Migration setProjectToMigrate(string project) { projectToMigrate = project ; return this;}
 
             // Niveau d'affichage dans la console
         private Utils.LevelOfDebug debug = Utils.LevelOfDebug.high;
@@ -143,7 +147,11 @@ namespace MigrationTool {
                 if (debug == Utils.LevelOfDebug.high) { Utils.log(Utils.executeShellCmd("ng", "generate component "+fileName), ConsoleColor.Red); }
 
                     // Gérer les routes
-                this.routes.Add(new Route("/"+fileName, fileName+"Component")) ;
+                if (fileName == "App") {
+                    this.routes.Add(new Route("/", fileName+"Component")) ;
+                }else {
+                    this.routes.Add(new Route("/"+fileName, fileName+"Component")) ;
+                }
 
                     // cd WPF && pwd
                 Directory.SetCurrentDirectory(@wpfPath);
