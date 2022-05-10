@@ -20,17 +20,22 @@ namespace MigrationTool {
             this.name = name;
         }
 
-        public string getHTML() {
-            return "Not done yet" ;
+        public List<string> getHTML() {
+            return Utils.getFilesByExtension(getPath(), ".html") ;
         }
 
-        public string getTypescript() {
-            return "Not done yet" ;
+        public List<string> getTypescript() {
+            List<string> ret = new List<string>() ;
+            List<string> list = Utils.getFilesByExtension(getPath(), ".ts") ;
+            foreach(string s in list) {
+                if (! s.EndsWith(".spec.ts")) {
+                    ret.Add(s) ;
+                }
+            }
+            
+            return ret;
         }
     }
-
-
-
 
 
 
@@ -78,7 +83,6 @@ namespace MigrationTool {
             }
            if (selectedComponent == null)
                 throw new NullReferenceException("Cannot found the component : " + componentName);
-
             return selectedComponent;
         }
     }

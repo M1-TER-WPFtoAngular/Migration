@@ -129,7 +129,7 @@ namespace MigrationTool {
             Utils.log("pwd : " + pwd);
 
                 // Récupération de tout les fichiers xaml
-            List<string> xamlFiles = Utils.getFilesByExtension(@wpfPath, "xaml") ;
+            List<string> xamlFiles = Utils.getFilesByExtension(@wpfPath, ".xaml") ;
             foreach (string file in xamlFiles) {
                 string[] filenameSplit = file.Split("/");
                 string fileNameExt = filenameSplit[filenameSplit.Length-1];
@@ -165,7 +165,7 @@ namespace MigrationTool {
 
         public void fromXAMLtoHTML() {
                 // Récupération de tout les fichiers xaml
-            List<string> xamlFiles = Utils.getFilesByExtension(@wpfPath, "xaml") ;
+            List<string> xamlFiles = Utils.getFilesByExtension(@wpfPath, ".xaml") ;
             foreach (string file in xamlFiles) {
                 string[] filenameSplit = file.Split("/");
                 string fileNameExt = filenameSplit[filenameSplit.Length-1];

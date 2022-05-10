@@ -28,7 +28,14 @@ namespace MigrationTool {
             r.Add(new Route("/", "Component")) ;
             r.Add(new Route("/", "Component")) ;
 
-            a.updateRoutes(r);
+            //a.updateRoutes(r);
+
+            foreach(string s in a.selectComponent("app").getHTML()) {
+                Console.WriteLine(s) ;
+            } 
+            foreach(string s in a.selectComponent("app").getTypescript()) {
+                Console.WriteLine(s) ;
+            }
             return;
 
 

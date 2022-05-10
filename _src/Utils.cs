@@ -19,9 +19,6 @@ namespace MigrationTool {
         public enum LevelOfDebug { none, low, high }
 
         public static void log(string msg, ConsoleColor color = ConsoleColor.Blue) {
-            //if (debug == LevelOfDebug.low) { color = ConsoleColor.Blue ; }
-            //if (debug == LevelOfDebug.high) { color = ConsoleColor.Red ;}
-
             Console.Write("> ") ;
             Console.ForegroundColor = color;
             Console.WriteLine(msg) ;
@@ -66,10 +63,8 @@ namespace MigrationTool {
             List<string> ret = new List<string>();
             var dir = new DirectoryInfo(path);
             foreach (FileInfo file in dir.GetFiles()){
-                string[] splitName = file.Name.Split(".");
-                if (splitName[splitName.Length-1] == extension) {
+                if (file.Name.EndsWith(extension)) {
                     ret.Add(Path.Combine(path, file.Name));
-                    //Console.WriteLine(Path.Combine(path, file.Name)) ;
                 }
             }
             DirectoryInfo[] dirs = dir.GetDirectories();
@@ -80,5 +75,27 @@ namespace MigrationTool {
         }
     }
 
+
+
+
+
+    public class Route {
+
+        private string url;
+        private string componentName;
+
+
+        public Route(string url, string componentName) {
+            this.url = url;
+            this.componentName = componentName;
+        }
+
+        public string getUrl() { return url;}
+        public string getComponent() { return componentName;}
+
+        public Route setUrl(string url) { this.url = url; return this;}
+        public Route setComponent(string componentName) { this.componentName = componentName;return this;}
+
+    }
     
 }
