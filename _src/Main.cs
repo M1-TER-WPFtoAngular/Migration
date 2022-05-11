@@ -20,7 +20,7 @@ namespace MigrationTool {
                 Console.WriteLine("Usage: ./runC#.sh Migration.cs <Project To Migrate>") ;
                 return ;
             }
-    
+    /*
             AngularEditor a = new AngularEditor("WpfToAngular/martin") ;
             List<Route> r = new List<Route>() ;
             r.Add(new Route("/", "Component")) ;
@@ -37,7 +37,7 @@ namespace MigrationTool {
                 Console.WriteLine(s) ;
             }
             return;
-
+ */
 
 
             Migration m = new Migration(Utils.LevelOfDebug.high);
@@ -54,7 +54,7 @@ namespace MigrationTool {
             angularEditor.updateRoutes(routes) ;
 
 
-            m.fromXAMLtoHTML() ;
+           // m.fromXAMLtoHTML() ;
 
 
 
